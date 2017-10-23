@@ -19,6 +19,7 @@
 - Recursive
 - Built-in Scalars: Int, Float, Boolean, String, ID
 - Custom scalars
+Adding exclamation point - required field
 ```
 scalar Date
 
@@ -95,5 +96,39 @@ yarn add graphql
 yarn add express express-graphql
 
 
-```
+npm i graph.ql
 
+var Schema = require('graph.ql);
+var schema = Schema(<schems>)
+
+    schema(<query>, <variables>)
+        .then(function(res){
+            console.log(res)
+        })
+```
+For each of the types we add an object
+```
+type Query {
+    find_film (id: Int): Film
+    find_person (id: Int): Person
+}`, {
+    Date: {
+    
+    },
+    Film: {
+    
+    },
+    Planet: {
+    
+    },
+    Query: {
+        find_film (query, args) {
+             
+        },
+        find_person (query, args) {
+        
+        }
+    }
+});
+```
+By default node colapses objects of a certain depth, to avoid that: `console.dir(res, { colors: true, depth: Infinity });`
