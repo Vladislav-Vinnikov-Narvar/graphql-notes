@@ -50,7 +50,8 @@ type Query {
             return film.producer.split(/\s*,\s*/);
         },
         characters (film, args) {
-            return axios.all(film.characters.map(url => {
+            var characters = args.limit ? film.characters.slice(0, args.limit) : film.characters;
+            return axios.all(characters.map(url => {
                 return axios.get(url).then(res => res.data)
             }));
        }
