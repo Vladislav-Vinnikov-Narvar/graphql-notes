@@ -9,7 +9,7 @@ type Character {
     eye_color: String
     gender: String
     homeworld(): Planet
-    films: [Film]
+    films(): [Film]
 }
 
 type Film {
@@ -37,6 +37,11 @@ type Query {
         homeworld (character, args) {
             return axios.get(character.homeworld)
                 .then(res => res.data);
+        },
+        films (character, args) {
+             return axios.all(character.films.map(url => {
+                return axios.get(url).then(res => res.data)
+            }));
         }
     },
     Film: {
@@ -76,6 +81,9 @@ schema(`
                 homeworld {
                     name
                     population
+                }
+                films {
+                    title
                 }
             }
         }
