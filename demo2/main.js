@@ -1,31 +1,14 @@
+var axios = require('axios');
 var Schema = require('graph.ql');
-/*
-* schema(<query>, <variables>)
-        .then(function(res){
-            console.log(res)
-        })*/
 
-var characters = {
-    1: {
-        id: 1,
-        name: 'Jim'
-    },
-    2: {
-        id: 2,
-        name: 'Jake'
-    },
-    3: {
-        id: 3,
-        name: 'Bill'
-    }
-};
 var schema = Schema(`
 scalar Date
 
 type Character {
-    id: Int
     name: String!
-    homeworld: Planet
+    eye_color: String
+    gender: String
+    homeworld(): Planet
     films: [Film]
 }
 
@@ -38,7 +21,7 @@ type Film {
 
 type Planet {
     name: String!
-    population: Int
+    population: String
 }
 
 type Query {
@@ -50,32 +33,31 @@ type Query {
             return new Date(v)
         } 
     },
+    Character: {
+        homeworld (character, args) {
+            return axios.get(character.homeworld)
+                .then(res => res.data);
+        }
+    },
     Film: {
         producers (film, args) {
             //console.log('film:', film);
-            return film.producers.split(',');
+            return film.producer.split(/\s*,\s*/);
         },
         characters (film, args) {
-            var ids = args.limit ? film.character_ids.slice(0, args.limit) : film.character_ids;
-            return ids.map(function (id) {
-               return characters[id]; 
-            });
-        }
+            return axios.all(film.characters.map(url => {
+                return axios.get(url).then(res => res.data)
+            }));
+       }
     },
     Planet: {
     
     },
     Query: {
         find_film (query, args) {
-            //return Film.find({ id: args.id })
-            //can return promise or value
-            //console.log(query, args); 
-            return {
-                title: 'Monday Morning',
-                release_date: '2017-10-23',
-                producers: 'Josh,Jake,Marc',
-                character_ids: [3,2,1]
-            }
+            return axios.get(`https://swapi.co/api/films/${args.id}/`, {
+                params: { responseType: 'json'}
+            }).then(res => res.data);
         },
         find_character (query, args) {
             console.log(query, args);
@@ -90,11 +72,15 @@ schema(`
             release_date,
             producers,
             characters (limit: 2) {
-                id
                 name
+                homeworld {
+                    name
+                    population
+                }
             }
         }
-    }
-`).then(function (res) {
+    }`, {
+        film: 1
+    }).then(function (res) {
     console.dir(res, { colors: true, depth: Infinity });
 });
