@@ -1,7 +1,10 @@
 
+var graphql = require('express-graph.ql')
 var Schema = require('./main.js')
 var express = require('express')
 var app = express()
+
+app.post('/query', graphql(Schema))
 
 app.get('/', function(req, res) {
     var film = req.query.film;

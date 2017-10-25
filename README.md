@@ -1,20 +1,20 @@
-# GraphQL is ...
+## GraphQL is ...
 - a query language open sourced by FB in 2015
 - not just for React or JS users
 - compatible with any backend (SQL, Mongoose ORM, existing APIs)
 - a replacement for REST
 
-# Why not REST?
+## Why not REST?
 - nested queries get messy
 - data joins are complicated (Model level or joining data in controllers - inconsistent approach)
 - easy to over-fetch data vs. GpraphQL provides very granular level request -> speeds up API requests
 
-# Problems with existing GraphQL documentation
+## Problems with existing GraphQL documentation
 - uses the low-level graphql js library
 - mixes in ES6 syntax
 - fragmented and incomplete
 
-# GraphQL Schema - a way to describe your data requirements
+## GraphQL Schema - a way to describe your data requirements
 - Srongly typed
 - Recursive
 - Built-in Scalars: Int, Float, Boolean, String, ID
@@ -46,7 +46,7 @@ type Query {
     person (id: Int): Person
 }
 ```
-# GraphQL Queries
+## GraphQL Queries
 - Actions we can perform on the data: GET, MODIFY, and SUBSCRIBE to info
 - Queries start in the scema. 
 For example, we can get a film by ID `film (id Int): Film`
@@ -64,7 +64,7 @@ query find($film: Int, $person: Int) {
     }
 }
 ```
-# Aliases - renaming fields
+## Aliases - renaming fields
 - Passing data to a query
 Result can be as following:
 ```json
@@ -83,6 +83,15 @@ Result can be as following:
     }
 }
 ```
+## Facebook open sourced IDE for GraphQL
+[https://github.com/graphql/graphiql](https://github.com/graphql/graphiql)
+- can write and run queries
+## Several ways to set up graphiql
+- separate endpoint
+- stand-alone app by Skevy [https://github.com/skevy/graphiql-app](https://github.com/skevy/graphiql-app)
+- Connect to existing GraphQL server - Middleware [https://github.com/matthewmueller/express-graph.ql](https://github.com/matthewmueller/express-graph.ql)
+
+
 ```
 
 ```

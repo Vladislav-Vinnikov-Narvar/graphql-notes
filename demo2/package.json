@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.17.0",
     "express": "^4.16.2",
+    "express-graph.ql": "^1.0.2",
     "graph.ql": "^2.0.2"
   },
   "devDependencies": {},
