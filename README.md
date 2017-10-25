@@ -48,7 +48,7 @@ type Query {
 ```
 ## GraphQL Queries
 - Actions we can perform on the data: GET, MODIFY, and SUBSCRIBE to info
-- Queries start in the scema. 
+- Queries start in the scema.
 For example, we can get a film by ID `film (id Int): Film`
 ```
 query find($film: Int, $person: Int) {
@@ -91,6 +91,7 @@ Result can be as following:
 - stand-alone app by Skevy [https://github.com/skevy/graphiql-app](https://github.com/skevy/graphiql-app)
 - Connect to existing GraphQL server - Middleware [https://github.com/matthewmueller/express-graph.ql](https://github.com/matthewmueller/express-graph.ql)
 
+![GraphiQL-IDE](https://raw.githubusercontent.com/Vladislav-Vinnikov-Narvar/graphql-notes/master/screenshots/GraphiQL-IDE.png)
 
 ```
 
@@ -122,20 +123,20 @@ type Query {
     find_person (id: Int): Person
 }`, {
     Date: {
-    
+
     },
     Film: {
-    
+
     },
     Planet: {
-    
+
     },
     Query: {
         find_film (query, args) {
-             
+
         },
         find_person (query, args) {
-        
+
         }
     }
 });
