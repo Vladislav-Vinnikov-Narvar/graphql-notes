@@ -1,7 +1,7 @@
 var axios = require('axios');
 var Schema = require('graph.ql');
 
-var schema = Schema(`
+module.exports = Schema(`
 scalar Date
 
 type Character {
@@ -71,25 +71,4 @@ type Query {
     }
 });
 
-schema(`
-    query find ($film: Int) {
-        find_film(id: $film) {
-            title,
-            release_date,
-            producers,
-            characters (limit: 2) {
-                name
-                homeworld {
-                    name
-                    population
-                }
-                films {
-                    title
-                }
-            }
-        }
-    }`, {
-        film: 1
-    }).then(function (res) {
-    console.dir(res, { colors: true, depth: Infinity });
-});
+

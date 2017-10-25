@@ -132,3 +132,28 @@ type Query {
 });
 ```
 By default node colapses objects of a certain depth, to avoid that: `console.dir(res, { colors: true, depth: Infinity });`
+
+```
+schema(`
+    query find ($film: Int) {
+        find_film(id: $film) {
+            title,
+            release_date,
+            producers,
+            characters (limit: 2) {
+                name
+                homeworld {
+                    name
+                    population
+                }
+                films {
+                    title
+                }
+            }
+        }
+    }`, {
+        film: 1
+    }).then(function (res) {
+    console.dir(res, { colors: true, depth: Infinity });
+});
+```
