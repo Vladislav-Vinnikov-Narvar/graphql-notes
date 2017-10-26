@@ -24,14 +24,17 @@ type Planet {
     population: String
 }
 
+# These are the queries available on the server
 type Query {
+    # find a film by ID
     find_film (id: Int): Film
+    # find a Character by ID
     find_character (id: Int): Character
 }`, {
     Date: {
         serialize: function (v) {
             return new Date(v)
-        } 
+        }
     },
     Character: {
         homeworld (character, args) {
@@ -57,7 +60,7 @@ type Query {
        }
     },
     Planet: {
-    
+
     },
     Query: {
         find_film (query, args) {
@@ -70,5 +73,3 @@ type Query {
         }
     }
 });
-
-

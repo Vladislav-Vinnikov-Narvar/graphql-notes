@@ -92,9 +92,18 @@ Result can be as following:
 - Connect to existing GraphQL server - Middleware [https://github.com/matthewmueller/express-graph.ql](https://github.com/matthewmueller/express-graph.ql)
 
 ![GraphiQL-IDE](https://raw.githubusercontent.com/Vladislav-Vinnikov-Narvar/graphql-notes/master/screenshots/GraphiQL-IDE.png)
+`Ctrl+Space` for autocomplete
 
-```
+## Dataloader
+- Open source project by Facebook
+- Used to cache concurrent requests going to the same resource
+- Aims to speed up requests that are duplicates
 
+### Timing query requests
+```js
+console.time('without data loader');
+//code
+console.timeEnd('without data loader');
 ```
 ### Getting started with graph ql
 
