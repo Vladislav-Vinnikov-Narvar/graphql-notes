@@ -1,7 +1,8 @@
 var axios = require('axios');
 var Schema = require('graph.ql');
 
-module.exports = Schema(`
+module.exports = function (loader) {
+return Schema(`
 scalar Date
 
 type Character {
@@ -38,13 +39,10 @@ type Query {
     },
     Character: {
         homeworld (character, args) {
-            return axios.get(character.homeworld)
-                .then(res => res.data);
+          return loader.planet.load(character.homeworld);
         },
         films (character, args) {
-             return axios.all(character.films.map(url => {
-                return axios.get(url).then(res => res.data)
-            }));
+          loader.film.loadMany(character.films)
         }
     },
     Film: {
@@ -53,10 +51,11 @@ type Query {
             return film.producer.split(/\s*,\s*/);
         },
         characters (film, args) {
-            var characters = args.limit ? film.characters.slice(0, args.limit) : film.characters;
-            return axios.all(characters.map(url => {
-                return axios.get(url).then(res => res.data)
-            }));
+            var characters = args.limit
+              ? film.characters.slice(0, args.limit)
+              : film.characters;
+
+            return loader.character.loadMany(characters)
        }
     },
     Planet: {
@@ -64,12 +63,11 @@ type Query {
     },
     Query: {
         find_film (query, args) {
-            return axios.get(`https://swapi.co/api/films/${args.id}/`, {
-                params: { responseType: 'json'}
-            }).then(res => res.data);
+          return loader.film.load(args.id)
         },
         find_character (query, args) {
-            console.log(query, args);
+          return loader.character.load(args.id)
         }
     }
 });
+}
