@@ -105,6 +105,26 @@ console.time('without data loader');
 //code
 console.timeEnd('without data loader');
 ```
+## Mutations
+```
+mutation create ($post: PostInput) {
+  post: create_post(post: $post) {
+    title
+    slug
+    date
+    body
+  }
+}
+Query
+{
+	"post": {
+    "title": "GraphQL 102",
+    "date": "2017-10-29",
+    "body": "# All About GraphQL"
+  }
+}
+```
+
 ### Getting started with graph ql
 
 ```

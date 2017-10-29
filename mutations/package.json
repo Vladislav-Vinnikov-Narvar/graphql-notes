@@ -1,0 +1,21 @@
+{
+  "name": "mutations",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-graph.ql": "^1.0.2",
+    "graph.ql": "^2.0.2",
+    "object-assign": "^4.1.1",
+    "remarkable": "^1.7.1",
+    "to-slug-case": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
