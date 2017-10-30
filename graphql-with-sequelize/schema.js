@@ -3,7 +3,8 @@ import {
   GraphQLInt,
   GraphQLString,
   GraphQLList,
-  GraphQLSchema
+  GraphQLSchema,
+  GraphQLNonNull
 } from 'graphql';
 
 import Db from './db';
@@ -40,6 +41,14 @@ const Person = new GraphQLObjectType({
           return person.email
         }
       },
+      posts: {
+        type: new GraphQLList(Post),
+        resolve(person) {
+          //sequalize provides dynamic functions
+          //based on relationships
+          return person.getPosts();
+        }
+      }
     }
   }
 });
@@ -67,6 +76,12 @@ const Post = new GraphQLObjectType({
           return post.content
         }
       },
+      person: {
+        type: Person,
+        resolve(post) {
+          return post.getPerson();
+        }
+      }
     }
   }
 });
@@ -105,8 +120,39 @@ const Query = new GraphQLObjectType({
   }
 });
 
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  description: 'functions to create stuff',
+  fields() {
+    return {
+      addPerson: {
+        type: Person,
+        args: {
+          firstName: {
+            type: new GraphQLNonNull(GraphQLString)
+          },
+          lastName: {
+            type: new GraphQLNonNull(GraphQLString)
+          },
+          email: {
+            type: new GraphQLNonNull(GraphQLString)
+          }
+        },
+        resolve(_, args) {
+          return Db.models.person.create({
+            firstName: args.firstName,
+            lastName: args.lastName,
+            email: args.email.toLowerCase()
+          });
+        }
+      }
+    }
+  }
+})
+
 const Schema = new GraphQLSchema({
-  query: Query
+  query: Query,
+  mutation: Mutation
 });
 
 export default Schema;
