@@ -34,6 +34,27 @@ relay=>  \d
     firstName
     lastName
     email
+    posts {
+      title
+      content
+    }
+  }
+  posts {
+    id
+    title
+    content
+    person {
+      firstName
+      lastName
+      email
+    }
+  }
+  
+}
+
+mutation addPerson{
+  addPerson(firstName: "ddf", lastName: "dkgjk", email: "tkjtl@fkjf.com") {
+    id
   }
 }
 ```
