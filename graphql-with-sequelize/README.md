@@ -8,6 +8,12 @@ Node packages
 - `lodash`
 - `faker` randomly generate names and addresses
 - `babel-cli` run babel-node
+- `graphql` works stand-alone
+- `react`
+- `react-dom`
+- `express` - allow us to write a basic server
+- `express-graphql` - graphql Middleware
+- `graphiql` - IDE for graphql
 
 Running `babel-node db.js` as a stand-alone module
 ```
@@ -17,3 +23,17 @@ relay=>  \d
  public | posts         | table    | vlad
  public | posts_id_seq  | sequence | vlad
  ```
+
+### Querying with GraphiQL
+- `Ctr + Space` for autocomplete
+- `Cmd + /` to comment out a block
+```
+{
+  people {
+    id
+    firstName
+    lastName
+    email
+  }
+}
+```
