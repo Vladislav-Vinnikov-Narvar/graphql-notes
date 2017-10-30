@@ -1,0 +1,19 @@
+{
+  "name": "graphql-with-sequelize",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-node5": "^12.0.1",
+    "faker": "^4.1.0",
+    "lodash": "^4.17.4",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.19.0"
+  }
+}

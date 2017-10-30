@@ -5,9 +5,10 @@
 - a replacement for REST
 
 ## Why not REST?
-- nested queries get messy
+- nested queries get messy vs. GraphQL allows to bundle up requests
 - data joins are complicated (Model level or joining data in controllers - inconsistent approach)
 - easy to over-fetch data vs. GpraphQL provides very granular level request -> speeds up API requests
+
 
 ## Problems with existing GraphQL documentation
 - uses the low-level graphql js library
@@ -125,26 +126,7 @@ Query
 }
 ```
 
-### Getting started with graph ql
 
-```
-yarn init -y
-- Init project and nswer yes to all questions
-yarn add graphql
-- We add graphql to our project
-yarn add express express-graphql
-
-
-npm i graph.ql
-
-var Schema = require('graph.ql);
-var schema = Schema(<schems>)
-
-    schema(<query>, <variables>)
-        .then(function(res){
-            console.log(res)
-        })
-```
 For each of the types we add an object
 ```
 type Query {
